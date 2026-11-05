@@ -1,0 +1,19 @@
+
+.tracking-map {
+  width: 100%;
+  height: 380px;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.tracking-map-status {
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+@media (max-width: 600px) {
+  .tracking-map {
+    height: 300px;
+  }
+}

@@ -1,0 +1,4 @@
+import { Link } from "react-router-dom";
+import { categories, photo } from "../context/ShopContext";
+import "./Home.css";
+export default function Categories(){const images=["photo-1540420773420-3366772f4999","photo-1563636619-e9143da7973b","photo-1586201375761-83865001e31c","photo-1474979266404-7eaacbcd87c5","photo-1566478989037-eec170784d0b","photo-1608248543803-ba4f8c70ae0b","photo-1585421514738-01798e348b17","photo-1604917877934-07d8d248d396","photo-1621937081930-5e3f5d4b6b0f","photo-1450778869180-41d0601e046e"];return <section className="home-section"><div className="section-heading"><h2>All Categories</h2></div><div className="category-grid">{categories.map(([emoji,name],i)=><Link className="category-card" key={name} to={`/shop?category=${encodeURIComponent(name)}`}><img src={photo(images[i])} alt={name}/><strong>{emoji} {name}</strong></Link>)}</div></section>}

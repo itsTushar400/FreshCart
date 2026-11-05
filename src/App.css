@@ -1,0 +1,551 @@
+
+/* ========================================
+   FRESHCART - MAIN APP LAYOUT
+======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --sticky-header-height: 0px;
+  --fresh-green: #078e40;
+}
+
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Inter', Arial, sans-serif;
+  color: #111820;
+  background: #fff;
+  overflow-x: clip;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+/* ========================================
+   APP SHELL
+======================================== */
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  overflow-x: clip;
+}
+
+/* Header stays in normal document flow.
+   This prevents the page content hiding behind it. */
+
+
+/* Header stays fixed while scrolling */
+.app-shell > .topbar,
+.app-shell > .topbar.is-compact {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  z-index: 99999 !important;
+  background: #fff !important;
+  transform: none !important;
+  transition: none !important;
+  margin: 0 !important;
+}
+
+
+/* Header child rows should not become fixed independently */
+
+.topbar,
+.header-brand-row,
+.header-location-row,
+.delivery-row,
+.location-bar {
+  max-width: 100%;
+}
+
+/* ========================================
+   MAIN CONTENT LAYOUT
+======================================== */
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 225px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  padding: 7px 3% 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-top: 0 !important;
+  overflow: visible;
+}
+
+.content {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   DESKTOP SIDEBAR
+======================================== */
+
+@media (min-width: 1025px) {
+  .main-layout > .sidebar {
+    position: sticky;
+    top: 15px;
+    align-self: start;
+    min-width: 0;
+    height: fit-content;
+    max-height: calc(100vh - 30px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5ce transparent;
+    z-index: 20;
+  }
+
+  .main-layout > .sidebar::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .main-layout > .sidebar::-webkit-scrollbar-thumb {
+    background: #cbd5ce;
+    border-radius: 10px;
+  }
+
+  .main-layout.sidebar-collapsed {
+    grid-template-columns: 58px minmax(0, 1fr);
+  }
+
+  .main-layout.sidebar-collapsed > .sidebar {
+    min-width: 0;
+  }
+}
+
+/* ========================================
+   TOP NAVIGATION
+======================================== */
+
+.nav-row {
+  position: relative;
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 7px;
+  padding: 5px 0;
+  background: #fff;
+  border-bottom: 1px solid #f0f2f1;
+  z-index: 10;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2.5vw, 36px);
+  min-width: 0;
+  height: 100%;
+  padding-left: 20px;
+}
+
+.nav-links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 38px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #26332b;
+}
+
+.nav-links .nav-active {
+  color: var(--fresh-green);
+}
+
+.nav-links .nav-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--fresh-green);
+  border-radius: 3px;
+}
+
+.fresh-deals {
+  flex-shrink: 0;
+  border: 0;
+  background: var(--fresh-green);
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.fresh-deals span {
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+  text-align: center;
+  color: #89918c;
+  font-size: 10px;
+  padding: 18px;
+  border-top: 1px solid #f0f2f1;
+  margin-top: 12px;
+}
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.empty-state {
+  padding: 35px 18px;
+  text-align: center;
+  border: 1px solid #e7ece9;
+  border-radius: 10px;
+  background: #f8fcf9;
+}
+
+.empty-state h2 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.empty-state p {
+  font-size: 13px;
+  color: #6b736d;
+}
+
+.empty-state a {
+  display: inline-block;
+  background: var(--fresh-green);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+
+/* ========================================
+   MOBILE BOTTOM NAVIGATION
+======================================== */
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* ========================================
+   TABLET + MOBILE
+======================================== */
+
+@media (max-width: 1024px) {
+  .main-layout,
+  .main-layout.sidebar-collapsed {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 15px 90px;
+    margin-top: 0 !important;
+  }
+
+  .main-layout > .sidebar {
+    display: none !important;
+    position: static !important;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .main-layout > .content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Navigation scrolls horizontally when needed */
+
+  .main-layout > .content > .nav-row {
+    position: relative;
+    top: auto;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .main-layout > .content > .nav-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links {
+    flex-shrink: 0;
+    gap: 18px;
+    padding-left: 0;
+  }
+
+  .nav-links a {
+    min-height: 38px;
+  }
+
+  .fresh-deals {
+    display: none;
+  }
+
+  /* Bottom navigation */
+
+  .mobile-bottom-nav {
+    display: flex !important;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    z-index: 9999;
+    justify-content: space-around;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
+    background: #fff;
+    border-top: 1px solid #e8eee9;
+    box-shadow: 0 -3px 14px rgba(0, 0, 0, 0.06);
+  }
+
+  .mobile-bottom-nav a {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 3px 0;
+    color: #737b75;
+  }
+
+  .mobile-bottom-nav .mobile-nav-icon {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .mobile-bottom-nav .mobile-nav-label {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .mobile-bottom-nav a.nav-active {
+    color: var(--fresh-green);
+  }
+}
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+  .main-layout,
+  .main-layout.sidebar-collapsed {
+    padding: 0 10px 85px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+
+  .mobile-bottom-nav .mobile-nav-icon {
+    font-size: 21px;
+  }
+
+  .mobile-bottom-nav .mobile-nav-label {
+    font-size: 9px;
+  }
+}
+
+/* ========================================
+   HIDE MOBILE NAV ON DESKTOP
+======================================== */
+
+@media (min-width: 1025px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   WIDTH & OVERFLOW SAFETY
+======================================== */
+
+.app-shell,
+.main-layout,
+.content {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Keep normal browser scrolling */
+
+html,
+body {
+  overflow-x: clip;
+}
+
+
+/* Stop navbar from sticking while scrolling */
+.main-layout > .content > .nav-row {
+  position: static !important;
+  top: auto !important;
+  z-index: 1;
+  box-shadow: none !important;
+}
+
+
+/* FORCE STOP STICKY NAVBAR */
+html body #root .app-shell .main-layout > .content > .nav-row {
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  z-index: 1 !important;
+  box-shadow: none !important;
+}
+
+/* Stop sticky behavior on navbar children */
+html body #root .app-shell .main-layout > .content > .nav-row * {
+  scroll-margin-top: 0;
+}
+
+
+/* Navbar should scroll normally with the page */
+.main-layout > .content > .nav-row {
+  position: static !important;
+  top: auto !important;
+  bottom: auto !important;
+  z-index: 1 !important;
+  box-shadow: none !important;
+}
+
+/* Prevent sticky behavior from navbar itself */
+.nav-row {
+  position: static !important;
+  top: auto !important;
+}
+
+
+/* Reserve space for fixed header */
+:root {
+  --sticky-header-height: 140px;
+}
+
+.app-shell > .main-layout {
+  padding-top: 7px !important;
+  margin-top: var(--sticky-header-height) !important;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --sticky-header-height: 120px;
+  }
+
+  .app-shell > .main-layout {
+    margin-top: var(--sticky-header-height) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --sticky-header-height: 110px;
+  }
+
+  .app-shell > .main-layout {
+    margin-top: var(--sticky-header-height) !important;
+  }
+}
+
+
+/* FIXED HEADER + STICKY CATEGORY SIDEBAR */
+
+.app-shell > .topbar,
+.app-shell > .topbar.is-compact {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 99999 !important;
+  background: #fff !important;
+}
+
+/* Desktop sidebar remains visible during page scroll */
+@media (min-width: 1025px) {
+  .app-shell > .main-layout > .sidebar {
+    position: sticky !important;
+    top: 155px !important;
+    align-self: start !important;
+    height: fit-content !important;
+    max-height: calc(100vh - 170px) !important;
+    overflow-y: auto !important;
+    z-index: 30 !important;
+  }
+}
+
+/* Tablet and mobile */
+@media (max-width: 1024px) {
+  .app-shell > .main-layout > .sidebar {
+    display: none !important;
+  }
+}

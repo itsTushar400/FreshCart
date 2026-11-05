@@ -1,0 +1,534 @@
+
+.otm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(12, 22, 16, 0.68);
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+}
+
+.otm-modal {
+  width: min(760px, 100%);
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  color: #17251c;
+  border: 1px solid #e5eee7;
+  border-radius: 22px;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.25);
+  animation: otm-appear 0.22s ease-out;
+}
+
+@keyframes otm-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.otm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e8eee9;
+  background: #fff;
+}
+
+.otm-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+}
+
+.otm-heading-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: #e8f7ed;
+  color: #168344;
+}
+
+.otm-header h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+}
+
+.otm-subtitle {
+  margin: 5px 0 0;
+  color: #718078;
+  font-size: 13px;
+}
+
+.otm-close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 39px;
+  height: 39px;
+  border: 0;
+  border-radius: 12px;
+  background: #f1f5f2;
+  color: #35473b;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.otm-close:hover {
+  background: #fee9e7;
+  color: #d92d20;
+}
+
+.otm-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.otm-status-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px;
+  border: 1px solid #e2efe5;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f4fcf6, #fff);
+}
+
+.otm-status-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: #168344;
+  background: #e1f5e7;
+}
+
+.otm-status-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.otm-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #758278;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.otm-status-copy h3 {
+  margin: 5px 0;
+  color: #16783c;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.otm-status-copy p {
+  margin: 0;
+  color: #68776d;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.otm-refresh {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #dce9df;
+  border-radius: 11px;
+  color: #188448;
+  background: #fff;
+  cursor: pointer;
+}
+
+.otm-refresh:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.otm-spinning {
+  animation: otm-spin 0.9s linear infinite;
+}
+
+@keyframes otm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.otm-progress {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin: 24px 0 26px;
+}
+
+.otm-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #9ba69e;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.otm-step:not(:last-child)::after {
+  position: absolute;
+  z-index: 0;
+  top: 17px;
+  left: calc(50% + 20px);
+  width: calc(100% - 36px);
+  height: 2px;
+  background: #e5eae6;
+  content: "";
+}
+
+.otm-step.active:not(:last-child)::after {
+  background: #37a765;
+}
+
+.otm-step-icon {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #e4eae5;
+  border-radius: 50%;
+  color: #9aa69d;
+  background: #fff;
+}
+
+.otm-step.active {
+  color: #168344;
+}
+
+.otm-step.active .otm-step-icon {
+  border-color: #168344;
+  color: #fff;
+  background: #168344;
+}
+
+.otm-map-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.otm-map-heading h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #24352a;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.otm-map-heading h3 svg {
+  color: #168344;
+}
+
+.otm-map-badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  color: #16783c;
+  background: #e9f8ed;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.otm-map-wrap {
+  position: relative;
+  height: 300px;
+  min-height: 220px;
+  overflow: hidden;
+  border: 1px solid #e0e8e1;
+  border-radius: 16px;
+  background: #edf2ee;
+}
+
+.otm-map {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  z-index: 1;
+}
+
+.otm-map-message {
+  position: absolute;
+  z-index: 500;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.83);
+  color: #425347;
+  text-align: center;
+  pointer-events: none;
+}
+
+.otm-map-message svg {
+  color: #168344;
+}
+
+.otm-map-message strong {
+  font-size: 15px;
+}
+
+.otm-map-message span {
+  max-width: 320px;
+  color: #68776d;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.otm-marker-shell {
+  background: transparent;
+  border: 0;
+}
+
+.otm-marker {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  transform: rotate(-45deg);
+  font-size: 19px;
+}
+
+.otm-marker::first-letter {
+  transform: rotate(45deg);
+}
+
+.otm-rider-pin {
+  background: #168344;
+}
+
+.otm-destination-pin {
+  background: #e9a23b;
+}
+
+.otm-route-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #415247;
+  background: #f1f8f2;
+  font-size: 12px;
+}
+
+.otm-route-info span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.otm-route-info svg {
+  color: #168344;
+}
+
+.otm-info-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.otm-info-card {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #e7ede8;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.otm-info-card p {
+  margin: 9px 0 0;
+  color: #29382e;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.otm-address {
+  font-weight: 500 !important;
+}
+
+.otm-error,
+.otm-note {
+  margin: 13px 0 0;
+  padding: 12px 14px;
+  border-radius: 11px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.otm-error {
+  border: 1px solid #f5d5d2;
+  color: #9f2922;
+  background: #fff4f2;
+}
+
+.otm-note {
+  color: #68776d;
+  background: #f5f7f5;
+}
+
+.otm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 24px;
+  border-top: 1px solid #e8eee9;
+  background: #fbfdfb;
+}
+
+.otm-footer > span {
+  color: #78857b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.otm-done-btn {
+  padding: 11px 22px;
+  border: 0;
+  border-radius: 11px;
+  color: #fff;
+  background: #168344;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.otm-done-btn:hover {
+  background: #106a35;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .otm-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .otm-modal {
+    width: 100%;
+    max-height: 95dvh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .otm-header {
+    padding: 16px;
+  }
+
+  .otm-header h2 {
+    font-size: 18px;
+  }
+
+  .otm-body {
+    padding: 15px;
+  }
+
+  .otm-heading-icon {
+    width: 41px;
+    height: 41px;
+  }
+
+  .otm-status-row {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .otm-status-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .otm-status-copy h3 {
+    font-size: 16px;
+  }
+
+  .otm-status-copy p {
+    font-size: 11px;
+  }
+
+  .otm-progress {
+    margin: 20px 0;
+    gap: 1px;
+  }
+
+  .otm-step {
+    font-size: 9px;
+  }
+
+  .otm-step-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .otm-step:not(:last-child)::after {
+    top: 14px;
+    left: calc(50% + 16px);
+    width: calc(100% - 29px);
+  }
+
+  .otm-map-wrap {
+    height: 260px;
+  }
+
+  .otm-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .otm-footer {
+    padding: 13px 16px;
+  }
+
+  .otm-done-btn {
+    padding: 10px 18px;
+  }
+}
